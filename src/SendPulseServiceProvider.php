@@ -14,11 +14,10 @@ class SendPulseServiceProvider extends ServiceProvider
     public function boot()
     {
         // Bootstrap code here.
-
         $this->app->when(SendPulseChannel::class)
             ->needs(ApiClient::class)
             ->give(function () {
-                $sendPulseConfig = config('broadcasting.connections.sendpulse');
+                $sendPulseConfig = config('services.sendpulse');
 
                 return new ApiClient($sendPulseConfig['API_USER_ID'], $sendPulseConfig['API_SECRET'], new FileStorage());
             });

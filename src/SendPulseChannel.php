@@ -4,17 +4,19 @@ namespace NotificationChannels\SendPulse;
 
 
 use Sendpulse\RestApi\ApiClient;
-use Sendpulse\RestApi\Storage\FileStorage;
-use NotificationChannels\SendPulse\Exceptions\CouldNotSendNotification;
-use NotificationChannels\SendPulse\Events\MessageWasSent;
-use NotificationChannels\SendPulse\Events\SendingMessage;
 use Illuminate\Notifications\Notification;
+use NotificationChannels\SendPulse\Exceptions\InvalidToSendPulseReturnType;
 
 class SendPulseChannel
 {
     /** @var ApiClient */
     protected $sendPulse;
 
+    /**
+     * SendPulseChannel constructor.
+     *
+     * @param ApiClient $apiClient
+     */
     public function __construct(ApiClient $apiClient)
     {
         $this->sendPulse = $apiClient;
@@ -23,17 +25,20 @@ class SendPulseChannel
     /**
      * Send the given notification.
      *
-     * @param mixed $notifiable
+     * @param mixed                                  $notifiable
      * @param \Illuminate\Notifications\Notification $notification
      *
-     * @throws \NotificationChannels\:channel_namespace\Exceptions\CouldNotSendNotification
+     * @return \stdClass
+     * @throws InvalidToSendPulseReturnType
      */
     public function send($notifiable, Notification $notification)
     {
-        //$response = [a call to the api of your notification send]
+        /** @var SendPulseMessage $message */
+        $message = $notification->toSendPulse($notifiable);
+        if (! $message instanceof SendPulseMessage) {
+            throw new InvalidToSendPulseReturnType();
+        }
 
-//        if ($response->error) { // replace this by the code need to check for errors
-//            throw CouldNotSendNotification::serviceRespondedWithAnError($response);
-//        }
+        return $this->sendPulse->createPushTask($message->payload['task'], $message->payload['additionalParams']);
     }
 }

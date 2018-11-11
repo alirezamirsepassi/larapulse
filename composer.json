@@ -31,6 +31,13 @@
             "NotificationChannels\\SendPulse\\Test\\": "tests"
         }
     },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "NotificationChannels\\SendPulse\\SendPulseServiceProvider"
+            ]
+        }
+    },
     "scripts": {
         "test": "vendor/bin/phpunit"
     },
