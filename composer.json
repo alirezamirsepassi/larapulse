@@ -1,0 +1,40 @@
+{
+    "name": "laravel-notification-channels/larapulse",
+    "description": "SendPulse notifications for laravel.",
+    "homepage": "https://github.com/alirezamirsepassi/larapulse",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alireza Mirsepassi",
+            "email": "alirezamirsepassi@gmail.com",
+            "homepage": "https://alireza.rocks",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.6.4",
+        "illuminate/notifications": "^5.3",
+        "illuminate/support": "^5.1|^5.2|^5.3",
+        "sendpulse/rest-api": "^1.0.7"
+    },
+    "require-dev": {
+        "mockery/mockery": "^0.9.5",
+        "phpunit/phpunit": "4.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "NotificationChannels\\SendPulse\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "NotificationChannels\\SendPulse\\Test\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit"
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
