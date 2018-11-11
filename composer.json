@@ -1,5 +1,5 @@
 {
-    "name": "laravel-notification-channels/larapulse",
+    "name": "alirezamirsepassi/larapulse",
     "description": "SendPulse notifications for laravel.",
     "homepage": "https://github.com/alirezamirsepassi/larapulse",
     "license": "MIT",

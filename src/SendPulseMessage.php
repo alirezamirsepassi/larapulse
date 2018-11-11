@@ -6,5 +6,8 @@ use Illuminate\Support\Arr;
 
 class SendPulseMessage
 {
-    // Message structure here
+    public static function create()
+    {
+        
+    }
 }
